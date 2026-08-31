@@ -1,6 +1,6 @@
 # chrome_extract
 
-small utility script meant to extract chrome folders from https://google-chrome.en.uptodown.com/windows installers. (requires 7zip)
+small utility script (requires 7zip) meant to extract chrome folders from https://google-chrome.en.uptodown.com/windows installers.
 
 ## usage:
 
