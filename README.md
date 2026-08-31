@@ -4,7 +4,7 @@ small utility script meant to extract chrome folders from https://google-chrome.
 
 ## usage:
 
-place installers in the same directory as the script and run it.
+place installers in the same directory as the script and run it. (requires 7zip)
 
 ````markdown
 - chrome_extract.py
