@@ -17,7 +17,7 @@ for zip_archive in script_dir.glob("*.zip"):
             f"{zip_archive}",
             f"-o{output_dir}",
             "-aoa"
-        ], stdout=subprocess.DEVNULL, check=True)
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
 
         msi_file = output_dir / "Installers" / "GoogleChromeStandaloneEnterprise64.msi"
 
@@ -42,7 +42,7 @@ for msi_file in script_dir.glob("*.msi"):
             f"{msi_file}",
             f"-o{output_dir}",
             "-aoa"
-        ], stdout=subprocess.DEVNULL, check=True)
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
 
         binary_file = output_dir / "Binary.GoogleChromeInstaller"
 
@@ -52,7 +52,7 @@ for msi_file in script_dir.glob("*.msi"):
             f"{binary_file}",
             f"-o{output_dir}",
             "-aoa"
-        ], stdout=subprocess.DEVNULL, check=True)
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
 
         updater_archive = output_dir / "updater.7z"
 
@@ -62,7 +62,7 @@ for msi_file in script_dir.glob("*.msi"):
             f"{updater_archive}",
             f"-o{output_dir}",
             "-aoa"
-        ], stdout=subprocess.DEVNULL, check=True)
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
 
         offline_path = output_dir / "bin" / "Offline"
         offline_sub_path = next(p for p in Path(str(offline_path)).iterdir() if p.is_dir())
@@ -100,11 +100,10 @@ for exe_file in script_dir.glob("*.exe"):
             str(chrome_archive),
             f"-o{output_dir}",
             "-aoa"
-        ], stdout=subprocess.DEVNULL, check=True)
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
 
         binary_directory = next(p for p in Path(str(output_dir)).iterdir() if p.is_dir())
         chrome_directory = next(p for p in Path(str(binary_directory)).iterdir() if p.is_dir())
-
 
         _ = shutil.copytree(chrome_directory, script_dir / chrome_directory.name, dirs_exist_ok=True)
 
