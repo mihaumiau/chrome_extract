@@ -83,28 +83,29 @@ for exe_file in script_dir.glob("*.exe"):
     output_dir = script_dir / f"{exe_file.name}.out"
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    _ = subprocess.run([
-        "7z",
-        "x",
-        str(exe_file),
-        f"-o{output_dir}",
-        "-aoa"
-    ], stdout=subprocess.DEVNULL, check=True)
-
-    chrome_archive = next(p for p in Path(str(output_dir)).iterdir() if p.is_file())
-
-    _ = subprocess.run([
-        "7z",
-        "x",
-        str(chrome_archive),
-        f"-o{output_dir}",
-        "-aoa"
-    ], stdout=subprocess.DEVNULL, check=True)
-
-    binary_directory = next(p for p in Path(str(output_dir)).iterdir() if p.is_dir())
-    chrome_directory = next(p for p in Path(str(binary_directory)).iterdir() if p.is_dir())
-
     try:
+        _ = subprocess.run([
+            "7z",
+            "x",
+            str(exe_file),
+            f"-o{output_dir}",
+            "-aoa"
+        ], stdout=subprocess.DEVNULL, check=True)
+
+        chrome_archive = next(p for p in Path(str(output_dir)).iterdir() if p.is_file())
+
+        _ = subprocess.run([
+            "7z",
+            "x",
+            str(chrome_archive),
+            f"-o{output_dir}",
+            "-aoa"
+        ], stdout=subprocess.DEVNULL, check=True)
+
+        binary_directory = next(p for p in Path(str(output_dir)).iterdir() if p.is_dir())
+        chrome_directory = next(p for p in Path(str(binary_directory)).iterdir() if p.is_dir())
+
+
         _ = shutil.copytree(chrome_directory, script_dir / chrome_directory.name, dirs_exist_ok=True)
 
         Path(exe_file).unlink(missing_ok=True)
